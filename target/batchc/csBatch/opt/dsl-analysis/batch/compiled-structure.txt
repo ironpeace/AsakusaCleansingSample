@@ -1,0 +1,32 @@
+batch: csBatch
+flow: CleansingSampleJobFlow
+    input:
+        a (ironpeace.jobflow.OriginalDataAfromCSV)
+        b (ironpeace.jobflow.OriginalDataBfromCSV)
+    output:
+        od (ironpeace.jobflow.OriginalDataToCSV)
+    stages:
+        prologue:
+        main:
+            stage: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0001.StageClient
+                mapper: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0001.StageMapper1
+                    fragment: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0001.MapFragment2
+                mapper: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0001.StageMapper2
+                    fragment: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0001.MapFragment1
+                reducer: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0001.StageReducer
+                    fragment: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0001.ReduceFragment3
+                        operator: ironpeace.operator.CleansingSampleOperator#groupedA([interface java.util.List, interface com.asakusafw.runtime.core.Result])[]
+                    fragment: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0001.ReduceFragment4
+                        operator: ironpeace.operator.CleansingSampleOperator#groupedB([interface java.util.List, interface com.asakusafw.runtime.core.Result])[]
+            stage: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0002.StageClient
+                mapper: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0002.StageMapper1
+                    fragment: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0002.MapFragment1
+                mapper: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0002.StageMapper2
+                    fragment: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0002.MapFragment2
+                reducer: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0002.StageReducer
+                    fragment: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0002.ReduceFragment3
+                        operator: ironpeace.operator.CleansingSampleOperator#joinDataAandB([class ironpeace.modelgen.dmdl.model.DataA, class ironpeace.modelgen.dmdl.model.DataB])[]
+                    fragment: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.stage0002.MapFragment4
+                        operator: com.asakusafw.vocabulary.flow.util.CoreOperatorFactory$Project#toString([])[]
+        epilogue:
+            stage: ironpeace.batchapp.csBatch.cleansingSampleJobFlow.directio.epilogue.StageClient

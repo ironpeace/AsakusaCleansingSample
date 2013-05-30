@@ -1,0 +1,19 @@
+digraph {
+    "ec48776d-2b78-44ee-884b-918d81d1d05f" [shape=box, label="@CoGroup\nCleansingSampleOperator.groupedB"];
+    "6c55a709-7edc-4719-8402-bb8e94bd005f" [shape=invhouse, label="od"];
+    subgraph "cluster_cb52ba6b-e22d-4ac7-89b6-2aae4873d9a0" {
+        label = "stage0002";
+        style = bold;
+        "d494c17e-7c5f-4a30-93d4-51d0fba1c4dd" [shape=point];
+        "9d57c68b-7e20-47a5-8ee9-d6bb44214a87" [shape=point];
+        "bb988ecc-9e17-4502-9cde-3e81459514d8" [shape=box, label="@Project\nproject"];
+        "45f5e62b-8d30-41df-b9ff-7ec0f1107409" [shape=box, label="@MasterJoin\nCleansingSampleOperator.joinDataAandB"];
+    }
+    "f3b94e47-c868-4ca7-8c35-08d5d1061580" [shape=box, label="@CoGroup\nCleansingSampleOperator.groupedA"];
+    "f3b94e47-c868-4ca7-8c35-08d5d1061580" -> "9d57c68b-7e20-47a5-8ee9-d6bb44214a87" [label="result>in"];
+    "ec48776d-2b78-44ee-884b-918d81d1d05f" -> "d494c17e-7c5f-4a30-93d4-51d0fba1c4dd" [label="result>in"];
+    "d494c17e-7c5f-4a30-93d4-51d0fba1c4dd" -> "45f5e62b-8d30-41df-b9ff-7ec0f1107409" [label="out>dataB"];
+    "9d57c68b-7e20-47a5-8ee9-d6bb44214a87" -> "45f5e62b-8d30-41df-b9ff-7ec0f1107409" [label="out>dataA"];
+    "bb988ecc-9e17-4502-9cde-3e81459514d8" -> "6c55a709-7edc-4719-8402-bb8e94bd005f" [label="out>port"];
+    "45f5e62b-8d30-41df-b9ff-7ec0f1107409" -> "bb988ecc-9e17-4502-9cde-3e81459514d8" [label="joined>in"];
+}

@@ -1,0 +1,15 @@
+batch: csBatch
+flow: CleansingSampleJobFlow
+    input:
+        a (ironpeace.jobflow.OriginalDataAfromCSV)
+        b (ironpeace.jobflow.OriginalDataBfromCSV)
+    output:
+        od (ironpeace.jobflow.OriginalDataToCSV)
+    flow: ironpeace.jobflow.CleansingSampleJobFlow
+        operator: com.asakusafw.vocabulary.flow.util.CoreOperatorFactory$Project#toString([])[]
+        operator: ironpeace.operator.CleansingSampleOperator#joinDataAandB([class ironpeace.modelgen.dmdl.model.DataA, class ironpeace.modelgen.dmdl.model.DataB])[]
+        input: InputDescription{name=b, type=class ironpeace.modelgen.dmdl.model.OriginalDataB}
+        input: InputDescription{name=a, type=class ironpeace.modelgen.dmdl.model.OriginalDataA}
+        output: OutputDescription{name=od, type=class ironpeace.modelgen.dmdl.model.OriginalData}
+        operator: ironpeace.operator.CleansingSampleOperator#groupedA([interface java.util.List, interface com.asakusafw.runtime.core.Result])[]
+        operator: ironpeace.operator.CleansingSampleOperator#groupedB([interface java.util.List, interface com.asakusafw.runtime.core.Result])[]

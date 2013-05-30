@@ -1,0 +1,37 @@
+digraph {
+    subgraph "cluster_689f289d-235c-4e54-aa8e-8ff541c24f8f" {
+        label = "stage0001";
+        style = bold;
+        "f1f3d28b-e63d-4661-9157-c330ee6a1d49" [shape=point];
+        "f52576e4-07a9-448d-8c32-c28c489beed1" [shape=point];
+        "88de9fed-8922-49fa-8cb6-185d9c812c6f" [shape=box, label="@CoGroup\nCleansingSampleOperator.groupedA"];
+        "424def22-7307-4391-beb7-1b37ca492d94" [shape=box, label="@CoGroup\nCleansingSampleOperator.groupedB"];
+    }
+    subgraph "cluster_9d32739a-bbfd-4c25-88c9-66b77dd64aeb" {
+        label = "(sink)";
+        "8ba777ed-57dd-42f9-a50d-b27a6b037578" [shape=invhouse, label="od"];
+    }
+    subgraph "cluster_b6c29699-783a-438d-9190-06903f90048c" {
+        label = "(source)";
+        "5aed9213-9547-4b64-a0a3-96acff19788f" [shape=invhouse, label="b"];
+        "d4f4d436-dfed-438e-bcaf-e2f81fdba8d9" [shape=invhouse, label="a"];
+    }
+    subgraph "cluster_f21f1ca8-8b38-40d2-a9d5-3ecd4896bc1f" {
+        label = "stage0002";
+        style = bold;
+        "d4744721-dcb6-4cdf-9172-883a33726771" [shape=point];
+        "2d4e8cb2-6bdb-4d42-9df9-a6d61700d52c" [shape=point];
+        "6aaf3b44-a02a-4775-9f3b-90ecf33c6686" [shape=box, label="@Project\nproject"];
+        "0fa78213-d343-45c8-bc44-bfddab3a6685" [shape=box, label="@MasterJoin\nCleansingSampleOperator.joinDataAandB"];
+    }
+    "f52576e4-07a9-448d-8c32-c28c489beed1" -> "88de9fed-8922-49fa-8cb6-185d9c812c6f" [label="out>odList"];
+    "f1f3d28b-e63d-4661-9157-c330ee6a1d49" -> "424def22-7307-4391-beb7-1b37ca492d94" [label="out>odList"];
+    "424def22-7307-4391-beb7-1b37ca492d94" -> "d4744721-dcb6-4cdf-9172-883a33726771" [label="result>in"];
+    "88de9fed-8922-49fa-8cb6-185d9c812c6f" -> "2d4e8cb2-6bdb-4d42-9df9-a6d61700d52c" [label="result>in"];
+    "d4f4d436-dfed-438e-bcaf-e2f81fdba8d9" -> "f52576e4-07a9-448d-8c32-c28c489beed1" [label="port>in"];
+    "5aed9213-9547-4b64-a0a3-96acff19788f" -> "f1f3d28b-e63d-4661-9157-c330ee6a1d49" [label="port>in"];
+    "d4744721-dcb6-4cdf-9172-883a33726771" -> "0fa78213-d343-45c8-bc44-bfddab3a6685" [label="out>dataB"];
+    "2d4e8cb2-6bdb-4d42-9df9-a6d61700d52c" -> "0fa78213-d343-45c8-bc44-bfddab3a6685" [label="out>dataA"];
+    "6aaf3b44-a02a-4775-9f3b-90ecf33c6686" -> "8ba777ed-57dd-42f9-a50d-b27a6b037578" [label="out>port"];
+    "0fa78213-d343-45c8-bc44-bfddab3a6685" -> "6aaf3b44-a02a-4775-9f3b-90ecf33c6686" [label="joined>in"];
+}

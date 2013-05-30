@@ -1,0 +1,92 @@
+
+"OriginalDataA"
+@directio.csv(has_header = TRUE)
+original_data_a = {
+
+    "keycode"
+    @directio.csv.field(name = "keycode")
+    keycode : INT;
+
+    "userid"
+    @directio.csv.field(name = "userid")
+    userid : TEXT;
+
+    "term"
+    @directio.csv.field(name = "term")
+    term : INT;
+
+    "dataA"
+    @directio.csv.field(name = "dataA")
+    data_a : LONG;
+};
+
+"OriginalDataB"
+@directio.csv(has_header = TRUE)
+original_data_b = {
+
+    "keycode"
+    @directio.csv.field(name = "keycode")
+    keycode : INT;
+
+    "userid"
+    @directio.csv.field(name = "userid")
+    userid : TEXT;
+
+    "term"
+    @directio.csv.field(name = "term")
+    term : INT;
+
+    "dataB"
+    @directio.csv.field(name = "dataB")
+    data_b : LONG;
+};
+
+"DataA"
+data_a = {
+	userid:TEXT;
+	data_a_0:LONG;
+	data_a_1:LONG;
+};
+
+"DataB"
+data_b = {
+	userid:TEXT;
+	data_b_0:LONG;
+	data_b_1:LONG;
+};
+
+joined joineddata =
+data_a -> {
+	userid -> userid;
+	data_a_0 -> data_a_0;
+	data_a_1 -> data_a_1;
+}% userid
++ data_b ->{
+	userid -> userid;
+	data_b_0 -> data_b_0;
+	data_b_1 -> data_b_1;
+}% userid;
+@auto_projection
+@directio.csv(has_header = TRUE)
+original_data = {
+
+    "userid"
+    @directio.csv.field(name = "userid")
+    userid : TEXT;
+
+    "dataA0"
+    @directio.csv.field(name = "dataA0")
+    data_a_0 : LONG;
+
+    "dataA1"
+    @directio.csv.field(name = "dataA1")
+    data_a_1 : LONG;
+
+    "dataB0"
+    @directio.csv.field(name = "dataB0")
+    data_b_0 : LONG;
+
+    "dataB1"
+    @directio.csv.field(name = "dataB1")
+    data_b_1 : LONG;
+};

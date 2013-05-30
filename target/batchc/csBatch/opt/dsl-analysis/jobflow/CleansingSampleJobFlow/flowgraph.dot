@@ -1,0 +1,17 @@
+digraph {
+    "64830ad1-aee5-4837-a90c-ca7dfde03c46" [shape=invhouse, label="b"];
+    "e2ac1791-40a9-4c7b-b742-3c8d22a04fb7" [shape=box, label="@CoGroup\nCleansingSampleOperator.groupedA"];
+    "da33e075-a7c8-4637-ae18-886f65acff23" [shape=invhouse, label="a"];
+    "1eed620f-a56d-4a75-bfe3-feb0fbbf1c06" [shape=point];
+    "56d11b0b-6815-423a-9025-155724493ea4" [shape=invhouse, label="od"];
+    "923768c3-322e-49ad-a350-61e60aba74e1" [shape=box, label="@CoGroup\nCleansingSampleOperator.groupedB"];
+    "0473b0f1-dedb-493c-96b7-ee995c7a647d" [shape=box, label="@MasterJoin\nCleansingSampleOperator.joinDataAandB"];
+    "c692d84c-4a2f-4a3d-ad98-4631c833ffb0" [shape=box, label="@Project\nproject"];
+    "64830ad1-aee5-4837-a90c-ca7dfde03c46" -> "923768c3-322e-49ad-a350-61e60aba74e1" [label="port>odList"];
+    "e2ac1791-40a9-4c7b-b742-3c8d22a04fb7" -> "0473b0f1-dedb-493c-96b7-ee995c7a647d" [label="result>dataA"];
+    "da33e075-a7c8-4637-ae18-886f65acff23" -> "e2ac1791-40a9-4c7b-b742-3c8d22a04fb7" [label="port>odList"];
+    "923768c3-322e-49ad-a350-61e60aba74e1" -> "0473b0f1-dedb-493c-96b7-ee995c7a647d" [label="result>dataB"];
+    "0473b0f1-dedb-493c-96b7-ee995c7a647d" -> "c692d84c-4a2f-4a3d-ad98-4631c833ffb0" [label="joined>in"];
+    "0473b0f1-dedb-493c-96b7-ee995c7a647d" -> "1eed620f-a56d-4a75-bfe3-feb0fbbf1c06" [label="missed>in"];
+    "c692d84c-4a2f-4a3d-ad98-4631c833ffb0" -> "56d11b0b-6815-423a-9025-155724493ea4" [label="out>port"];
+}

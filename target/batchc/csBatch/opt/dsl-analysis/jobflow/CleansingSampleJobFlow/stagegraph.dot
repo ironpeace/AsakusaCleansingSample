@@ -1,0 +1,37 @@
+digraph {
+    subgraph "cluster_7b67db43-e500-4402-963f-6e4552503d0e" {
+        label = "stage0002";
+        style = bold;
+        "3096e2f9-7d81-4dac-ba96-ae36ca464c8b" [shape=box, label="@Project\nproject"];
+        "38e0f5e0-4b5c-419d-b73f-99f600d2b444" [shape=box, label="@MasterJoin\nCleansingSampleOperator.joinDataAandB"];
+        "c8bc4cf8-3375-4fb1-a92b-6c0623a74266" [shape=point];
+        "949df09c-a9e1-437c-b083-f50f347c2031" [shape=point];
+    }
+    subgraph "cluster_e8a82d99-8b1d-4814-994c-999af6270d3b" {
+        label = "(sink)";
+        "df73a70f-48a2-44a3-87be-0192783ed418" [shape=invhouse, label="od"];
+    }
+    subgraph "cluster_f516517c-8508-4f05-8b09-a8ab14b33156" {
+        label = "(source)";
+        "aacb82e7-acc0-4e66-baf1-32638da46167" [shape=invhouse, label="b"];
+        "049fd074-94ad-4cf4-a964-82f87a37eb09" [shape=invhouse, label="a"];
+    }
+    subgraph "cluster_3f0c6c20-7545-4be1-91e7-a1747d50f9c7" {
+        label = "stage0001";
+        style = bold;
+        "c1f4fe48-5986-4162-8407-145eba1cd091" [shape=box, label="@CoGroup\nCleansingSampleOperator.groupedB"];
+        "b516295a-6250-4e02-a540-e092c73703ec" [shape=box, label="@CoGroup\nCleansingSampleOperator.groupedA"];
+        "ee5cdc98-c5bc-4312-a1c4-4a4b790a885f" [shape=point];
+        "d22652b2-bcf0-4628-98cb-8f3704cdcf1f" [shape=point];
+    }
+    "3096e2f9-7d81-4dac-ba96-ae36ca464c8b" -> "df73a70f-48a2-44a3-87be-0192783ed418" [label="out>port"];
+    "38e0f5e0-4b5c-419d-b73f-99f600d2b444" -> "3096e2f9-7d81-4dac-ba96-ae36ca464c8b" [label="joined>in"];
+    "949df09c-a9e1-437c-b083-f50f347c2031" -> "38e0f5e0-4b5c-419d-b73f-99f600d2b444" [label="out>dataB"];
+    "c8bc4cf8-3375-4fb1-a92b-6c0623a74266" -> "38e0f5e0-4b5c-419d-b73f-99f600d2b444" [label="out>dataA"];
+    "049fd074-94ad-4cf4-a964-82f87a37eb09" -> "ee5cdc98-c5bc-4312-a1c4-4a4b790a885f" [label="port>in"];
+    "aacb82e7-acc0-4e66-baf1-32638da46167" -> "d22652b2-bcf0-4628-98cb-8f3704cdcf1f" [label="port>in"];
+    "c1f4fe48-5986-4162-8407-145eba1cd091" -> "949df09c-a9e1-437c-b083-f50f347c2031" [label="result>in"];
+    "b516295a-6250-4e02-a540-e092c73703ec" -> "c8bc4cf8-3375-4fb1-a92b-6c0623a74266" [label="result>in"];
+    "ee5cdc98-c5bc-4312-a1c4-4a4b790a885f" -> "b516295a-6250-4e02-a540-e092c73703ec" [label="out>odList"];
+    "d22652b2-bcf0-4628-98cb-8f3704cdcf1f" -> "c1f4fe48-5986-4162-8407-145eba1cd091" [label="out>odList"];
+}
